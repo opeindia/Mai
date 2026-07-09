@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDlop - Premium Startup Landing Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>INDlop - Next Generation Social Network for India</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Global Styles */
         :root {
@@ -122,24 +122,14 @@
         }
 
         .nav-links a {
-            font-weight: 600;
+            font-weight: 500; /* Adjusted for image */
             font-size: 16px;
             position: relative;
+            color: var(--secondary-text-color); /* Adjusted for image */
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 0;
-            height: 2px;
-            background-color: var(--black-button-bg);
-            transition: width var(--transition-speed);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover {
+            color: var(--primary-text-color);
         }
 
         .nav-actions {
@@ -159,36 +149,77 @@
 
         /* Hero Section */
         .hero {
-            background-color: var(--light-gray-bg);
-            padding: 180px 0 100px 0;
-            text-align: center;
+            padding: 120px 0 0 0; /* Adjusted padding */
+            min-height: 100vh; /* Full viewport height */
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 80vh;
-            position: relative;
+            background-color: var(--white-color); /* Clean white background */
             overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: 56px;
-            line-height: 1.1;
-            max-width: 800px;
+        .hero-content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px; /* Space between text and image */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .hero-text-content {
+            flex: 1; /* Take up available space */
+            min-width: 300px; /* Minimum width before wrapping */
+            padding-bottom: 80px; /* Space for content below */
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--light-gray-bg);
+            color: var(--secondary-text-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
             margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 64px; /* Larger font size */
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero h1 .highlight {
+            color: var(--secondary-text-color); /* Grey for 'modern internet' */
         }
 
         .hero p {
             font-size: 20px;
             color: var(--secondary-text-color);
-            max-width: 700px;
+            max-width: 500px;
             margin-bottom: 40px;
         }
 
-        .hero-actions {
+        .hero-image-container {
+            flex: 1; /* Take up available space */
+            min-width: 400px; /* Minimum width before wrapping */
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            justify-content: flex-end; /* Align image to the right */
+            align-items: center;
+            position: relative;
+            height: 500px; /* Fixed height for the image container */
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/600x500/000033/00FFFF?text=INDlop+Visual') no-repeat center center / cover; /* Placeholder image with dark blue and light blue wave */
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--soft-shadow-hover); /* More prominent shadow for the image */
         }
 
         /* Feature Cards Section */
@@ -522,12 +553,27 @@
                 display: none;
             }
 
+            .hero-content-wrapper {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text-content {
+                padding-bottom: 40px;
+            }
+
             .hero h1 {
                 font-size: 48px;
             }
 
             .hero p {
                 font-size: 18px;
+            }
+
+            .hero-image-container {
+                min-width: unset;
+                width: 100%;
+                height: 300px; /* Adjust height for mobile */
             }
 
             .feature-grid {
@@ -567,7 +613,7 @@
             }
 
             .hero {
-                padding: 150px 0 80px 0;
+                padding: 100px 0 0 0;
             }
 
             .hero h1 {
@@ -654,40 +700,46 @@
     </header>
 
     <main>
-        <section id="home" class="hero fade-in">
-            <div class="container">
-                <h1>Unlock Your Potential with INDlop</h1>
-                <p>Experience the future of innovation with our cutting-edge solutions designed to elevate your business.</p>
-                <div class="hero-actions">
-                    <a href="#" class="btn btn-primary">Get Started</a>
-                    <a href="#features" class="btn">Learn More</a>
+        <section id="home" class="hero">
+            <div class="hero-content-wrapper">
+                <div class="hero-text-content fade-in">
+                    <span class="hero-badge">INDlop Infrastructure v2.0</span>
+                    <h1>The quiet foundation for <span class="highlight">modern internet.</span></h1>
+                    <p>We build fast, secure, and intuitive platforms that connect communities and empower creators across India.</p>
+                    <div class="hero-actions">
+                        <a href="#" class="btn btn-primary">Join the Network</a>
+                        <a href="#features" class="btn">Explore Features</a>
+                    </div>
+                </div>
+                <div class="hero-image-container fade-in">
+                    <div class="hero-image"></div>
                 </div>
             </div>
         </section>
 
         <section id="features" class="features">
             <div class="container">
-                <h2 class="fade-in">Powerful Features for Your Success</h2>
+                <h2 class="fade-in">Connect, Create, Thrive: Features for a New India</h2>
                 <div class="feature-grid">
                     <div class="feature-card fade-in">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                        <h3>Blazing Fast Performance</h3>
-                        <p>Our optimized platform ensures lightning-fast load times and seamless user experience.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        <h3>Vibrant Communities</h3>
+                        <p>Discover and join communities that share your passions and interests across India.</p>
                     </div>
                     <div class="feature-card fade-in">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        <h3>Enterprise-Grade Security</h3>
-                        <p>Your data is protected with advanced encryption and robust security protocols.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <h3>Empower Your Creativity</h3>
+                        <p>Share your stories, art, and ideas with a supportive audience and build your personal brand.</p>
                     </div>
                     <div class="feature-card fade-in">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                        <h3>Insightful Analytics</h3>
-                        <p>Gain deep insights into your operations with comprehensive and easy-to-understand analytics.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        <h3>Seamless Communication</h3>
+                        <p>Connect with friends, family, and new acquaintances through intuitive messaging and calls.</p>
                     </div>
                     <div class="feature-card fade-in">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <h3>Global Scalability</h3>
-                        <p>Scale your business effortlessly with a platform built to handle growth.</p>
+                        <h3>Global Reach, Local Heart</h3>
+                        <p>Experience a platform built for India, with connections that span the globe.</p>
                     </div>
                 </div>
             </div>
@@ -695,47 +747,47 @@
 
         <section id="about" class="about">
             <div class="container about-content">
-                <h2 class="fade-in">About INDlop</h2>
-                <p class="fade-in">INDlop is dedicated to fostering innovation and empowering businesses with cutting-edge technology. Our mission is to simplify complex processes, enhance productivity, and drive sustainable growth for our clients worldwide. We believe in a future where technology is intuitive, powerful, and accessible to everyone.</p>
-                <p class="fade-in">Our vision is to be the leading platform for digital transformation, recognized for our commitment to excellence, user-centric design, and unwavering support for our community. We are a remote-first global team, passionate about building solutions that make a real impact.</p>
+                <h2 class="fade-in">About INDlop: Connecting India, Redefining Social</h2>
+                <p class="fade-in">INDlop is more than just a social network; it's a movement to build a digital space that truly reflects the diversity and dynamism of India. Our mission is to provide a secure, inclusive, and innovative platform where every voice can be heard, every talent can shine, and every connection can flourish.</p>
+                <p class="fade-in">We envision a future where technology empowers genuine human connection, fosters creativity, and drives positive change. Built with a mobile-first approach and a deep understanding of local nuances, INDlop is designed to be the digital heart of India's next generation.</p>
             </div>
         </section>
 
         <section id="why-indlop" class="why-indlop">
             <div class="container why-indlop-content">
                 <div class="why-indlop-text">
-                    <h2 class="fade-in">Why Choose INDlop?</h2>
-                    <p class="fade-in">We combine innovative technology with a deep understanding of your needs to deliver unparalleled value. Here’s what sets us apart:</p>
+                    <h2 class="fade-in">Why INDlop is Your Next Digital Home</h2>
+                    <p class="fade-in">In a world of fleeting trends, INDlop offers a stable, secure, and vibrant space for you to connect, create, and grow. Here’s what makes us different:</p>
                     <div class="differentiator-list">
                         <div class="differentiator-item fade-in">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.93"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            <span>Unmatched Performance</span>
+                            <span>Unrivaled Privacy & Security</span>
                         </div>
                         <div class="differentiator-item fade-in">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                            <span>Robust Security</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            <span>Community-First Approach</span>
                         </div>
                         <div class="differentiator-item fade-in">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                            <span>Continuous Innovation</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                            <span>Blazing Fast & Reliable</span>
                         </div>
                         <div class="differentiator-item fade-in">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                            <span>Dedicated Community</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                            <span>Innovation at its Core</span>
                         </div>
                     </div>
                 </div>
                 <div class="why-indlop-image fade-in">
-                    <img src="https://via.placeholder.com/600x400?text=Why+INDlop" alt="Why Choose INDlop">
+                    <img src="https://via.placeholder.com/600x400/000033/00FFFF?text=Connecting+India" alt="Why Choose INDlop Social Network">
                 </div>
             </div>
         </section>
 
         <section class="cta">
             <div class="container">
-                <h2 class="fade-in">Ready to Transform Your Business?</h2>
-                <p class="fade-in">Join thousands of innovators who are already leveraging INDlop to achieve their goals. Get started today and unlock new possibilities.</p>
-                <a href="#" class="btn btn-primary fade-in">Start Your Journey Now &rarr;</a>
+                <h2 class="fade-in">Ready to Join India's Next-Gen Social Experience?</h2>
+                <p class="fade-in">Step into a world where connections are meaningful, creativity is celebrated, and your voice truly matters. Join INDlop today!</p>
+                <a href="#" class="btn btn-primary fade-in">Get Started Now &rarr;</a>
             </div>
         </section>
 
@@ -743,7 +795,7 @@
             <div class="contact-grid">
                 <div class="contact-info fade-in">
                     <h2>Let's talk.</h2>
-                    <p>Whether you're exploring enterprise solutions, need technical support, or just want to say hello, we're here.</p>
+                    <p>Whether you're exploring partnership opportunities, need support, or just want to share your ideas, we're here to listen.</p>
                     <div class="contact-blocks">
                         <div class="block">
                             <h3>General Inquiries</h3>
@@ -778,7 +830,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+                            <textarea id="message" name="message" placeholder="Tell us about your project or feedback..." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
