@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDlop | The Future of Digital Interaction</title>
+    <meta name="description" content="INDlop is a premium platform designed for trust, simplicity, and innovation. Built for creators, developers, and businesses.">
+    
+    <style>
+        /* 
+         * DESIGN SYSTEM & VARIABLES
+         */
+        :root {
+            /* Colors - Light Mode */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --accent-primary: #000000;
+            --accent-secondary: #e5e7eb;
+            --border-color: #e5e7eb;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
+            
+            /* Typography */
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            
+            /* Spacing & Radii */
+            --container-max: 1200px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Colors - Dark Mode */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --accent-primary: #ffffff;
+            --accent-secondary: #1f2937;
+            --border-color: #1f2937;
+            --glass-bg: rgba(10, 10, 10, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --gradient-primary: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        /* 
+         * BASE STYLES
+         */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color var(--transition-fast), color var(--transition-fast);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+            transition: var(--transition-fast);
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        /* 
+         * UTILITIES & ANIMATIONS
+         */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-pill);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        /* 
+         * NAVIGATION
+         */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all var(--transition-fast);
+        }
+
+        header.scrolled {
+            padding: 12px 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: var(--radius-pill);
+            font-size: 15px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: var(--transition-fast);
+        }
+
+        /* 
+         * HERO SECTION
+         */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background: var(--bg-primary);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: clamp(18px, 2vw, 24px);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .hero-visual {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(120, 120, 120, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            filter: blur(80px);
+            border-radius: 50%;
+            animation: float 20s infinite alternate;
+        }
+
+        [data-theme="dark"] .blob {
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+
+        @keyframes float {
+            0% { transform: translate(-10%, -10%) scale(1); }
+            100% { transform: translate(10%, 10%) scale(1.1); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+
+        .mouse {
+            width: 20px;
+            height: 32px;
+            border: 2px solid var(--text-secondary);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .mouse::after {
+            content: '';
+            width: 2px;
+            height: 6px;
+            background: var(--text-secondary);
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 10px); }
+        }
+
+        /* 
+         * ABOUT SECTION
+         */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .about p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .mv-card {
+            padding: 32px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .mv-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .mv-card p {
+            font-size: 15px;
+            margin-bottom: 0;
+        }
+
+        /* 
+         * FEATURES SECTION
+         */
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            transition: var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-premium);
+            border-color: var(--text-primary);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* 
+         * WHY INDLOP / STATS
+         */
+        .stats {
+            background: var(--bg-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.04em;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        /* 
+         * ROADMAP SECTION
+         */
+        .roadmap-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .roadmap-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--border-color);
+            transform: translateX(-50%);
+        }
+
+        .roadmap-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .roadmap-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .roadmap-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--bg-primary);
+            border: 4px solid var(--text-primary);
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .roadmap-content {
+            width: 85%;
+            padding: 32px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            margin: 0 40px;
+        }
+
+        .roadmap-content h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .roadmap-content .phase {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* 
+         * FAQ SECTION
+         */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+            color: var(--text-secondary);
+            margin-top: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 16px;
+        }
+
+        .faq-icon {
+            transition: transform var(--transition-fast);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* 
+         * CONTACT SECTION
+         */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+        }
+
+        .contact-info h3 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-family: inherit;
+            transition: var(--transition-fast);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* 
+         * FOOTER
+         */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-primary);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            margin-bottom: 24px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* 
+         * RESPONSIVE
+         */
+        @media (max-width: 1024px) {
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions .btn {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 56px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+            .roadmap-container::before {
+                left: 20px;
+            }
+            .roadmap-item {
+                justify-content: flex-start;
+                padding-right: 0;
+                padding-left: 40px;
+            }
+            .roadmap-dot {
+                left: 20px;
+            }
+            .roadmap-content {
+                width: 100%;
+                margin: 0;
+            }
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full {
+                grid-column: span 1;
+            }
+        }
+
+        /* 
+         * MOBILE MENU
+         */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background: var(--bg-primary);
+            z-index: 2000;
+            padding: 80px 40px;
+            transition: var(--transition-smooth);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .mobile-menu a {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#help">Help</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#home" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="3"/>
+                        <path d="M16 8V24M8 16H24" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    INDlop
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
+                    <li><a href="#help">Help</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                        <svg id="sunIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg id="moonIcon" style="display:none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                    <button class="hamburger" id="menuBtn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-visual">
+            <div class="blob" style="top: 10%; left: 10%;"></div>
+            <div class="blob" style="bottom: 10%; right: 10%; animation-delay: -5s;"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content reveal">
+                <span class="badge">Introducing INDlop 1.0</span>
+                <h1 class="text-gradient">The Future of Digital Interaction</h1>
+                <p>A premium platform designed for trust, simplicity, and innovation. Built for creators, developers, and businesses who demand excellence.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Start Building</a>
+                    <a href="#features" class="btn btn-secondary">Explore Features</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <span class="badge">Our Identity</span>
+                    <h2>Redefining the digital loop.</h2>
+                    <p>INDlop was born from a vision to simplify complexity. We believe that technology should be an invisible force that empowers, rather than a barrier that complicates.</p>
+                    <p>Our platform is built on the pillars of world-class design and uncompromising engineering, ensuring that every interaction feels natural, secure, and lightning-fast.</p>
+                    <div class="mission-vision">
+                        <div class="mv-card">
+                            <h3>Our Mission</h3>
+                            <p>To simplify complexity and build trust through elegant digital solutions that empower everyone.</p>
+                        </div>
+                        <div class="mv-card">
+                            <h3>Our Vision</h3>
+                            <p>A world where technology empowers human potential seamlessly and securely.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image reveal" style="transition-delay: 0.2s;">
+                    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="400" rx="40" fill="var(--bg-secondary)"/>
+                        <circle cx="200" cy="200" r="100" stroke="var(--text-primary)" stroke-width="2" stroke-dasharray="10 10"/>
+                        <circle cx="200" cy="200" r="60" fill="var(--text-primary)" fill-opacity="0.05" stroke="var(--text-primary)" stroke-width="1"/>
+                        <path d="M150 200C150 172.386 172.386 150 200 150C227.614 150 250 172.386 250 200C250 227.614 227.614 250 200 250" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="200" cy="200" r="10" fill="var(--text-primary)"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="badge">Core Capabilities</span>
+                <h2>Everything you need to scale.</h2>
+                <p>Powerful features wrapped in a minimalist interface, designed to help you focus on what truly matters.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Uncompromising Security</h3>
+                    <p>Enterprise-grade encryption and security protocols built into the core of the platform.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for performance with sub-millisecond latency and instant global delivery.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    </div>
+                    <h3>Intuitive Interface</h3>
+                    <p>A clean, minimal design system that prioritizes clarity and ease of use.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.3s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    </div>
+                    <h3>Seamless Scalability</h3>
+                    <p>Designed to grow with you, from your first user to your first million.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.4s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3>Developer First</h3>
+                    <p>Robust APIs and documentation that developers actually love to use.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.5s;">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3>Global Ready</h3>
+                    <p>Built-in internationalization and multi-region support from day one.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid reveal">
+                <div class="stat-item">
+                    <h3><span class="counter" data-target="99">0</span>.9%</h3>
+                    <p>Uptime</p>
+                </div>
+                <div class="stat-item">
+                    <h3><span class="counter" data-target="250">0</span>ms</h3>
+                    <p>Avg Latency</p>
+                </div>
+                <div class="stat-item">
+                    <h3><span class="counter" data-target="100">0</span>+</h3>
+                    <p>Integrations</p>
+                </div>
+                <div class="stat-item">
+                    <h3><span class="counter" data-target="24">0</span>/7</h3>
+                    <p>Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP SECTION -->
+    <section class="roadmap" id="roadmap">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="badge">The Journey</span>
+                <h2>Our Development Roadmap</h2>
+                <p>We are building for the long term. Here is a glimpse into the future of INDlop.</p>
+            </div>
+            <div class="roadmap-container">
+                <div class="roadmap-item reveal">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <span class="phase">Phase 1</span>
+                        <h3>Premium Launch</h3>
+                        <p>Establishing our world-class presence and core vision through a refined launch experience.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item reveal">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <span class="phase">Phase 2</span>
+                        <h3>Platform Infrastructure</h3>
+                        <p>Deploying robust CMS and admin capabilities for seamless content and data management.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item reveal">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <span class="phase">Phase 3</span>
+                        <h3>Trust & Identity</h3>
+                        <p>Advanced authentication systems and security frameworks to protect our growing community.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item reveal">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <span class="phase">Phase 4</span>
+                        <h3>Social Ecosystem</h3>
+                        <p>Introducing creator tools and social layers to foster collaboration and interaction.</p>
+                    </div>
+                </div>
+                <div class="roadmap-item reveal">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <span class="phase">Phase 5</span>
+                        <h3>Global Platform</h3>
+                        <p>Full-scale expansion into international markets with intelligent, localized features.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq" id="help">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="badge">Common Questions</span>
+                <h2>Help Center</h2>
+                <p>Everything you need to know about INDlop and our ecosystem.</p>
+            </div>
+            <div class="faq-container reveal">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is INDlop?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>INDlop is a premium digital platform designed to simplify complexity through elegant design and robust engineering. We provide tools for creators, developers, and businesses to build and scale their visions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Who is INDlop for?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We serve a wide range of users including early adopters, creators, developers, and businesses who value premium aesthetics and high-performance technology.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is INDlop secure?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. Security is one of our core pillars. We implement enterprise-grade encryption and follow industry best practices to ensure your data is always protected.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How can I get started?
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can get started by reaching out to us through our contact form. Our team will guide you through the onboarding process and help you integrate INDlop into your workflow.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <span class="badge">Get in Touch</span>
+                    <h2>Let's build something extraordinary.</h2>
+                    <p>Have questions or ready to start? Reach out to our team and we'll get back to you within 24 hours.</p>
+                    <div class="contact-method">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <div>
+                            <p style="margin:0; font-weight: 700;">Email Us</p>
+                            <a href="mailto:help@indlop.com" style="color: var(--text-secondary);">help@indlop.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container reveal" style="transition-delay: 0.2s;">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group full">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" placeholder="How can we help?" required>
+                        </div>
+                        <div class="form-group full">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" placeholder="Tell us more about your project..." required></textarea>
+                        </div>
+                        <div class="form-group full">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
+                        </div>
+                    </form>
+                    <div id="formSuccess" style="display:none; text-align:center; padding: 40px; background: var(--bg-secondary); border-radius: var(--radius-md);">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #10b981; margin-bottom: 16px;"><polyline points="20 6 9 17 4 12"/></svg>
+                        <h3>Message Sent!</h3>
+                        <p>Thank you for reaching out. We'll be in touch shortly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#home" class="logo footer-logo">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="3"/>
+                            <path d="M16 8V24M8 16H24" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        INDlop
+                    </a>
+                    <p style="color: var(--text-secondary); max-width: 300px;">Simplifying the digital loop through premium design and innovation.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#" aria-label="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 INDlop. All rights reserved.</p>
+                <p>Designed for the future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* 
+         * THEME TOGGLE
+         */
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        const body = document.body;
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        updateIcons(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcons(newTheme);
+        });
+
+        function updateIcons(theme) {
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        /* 
+         * STICKY HEADER
+         */
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        /* 
+         * MOBILE MENU
+         */
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+
+        /* 
+         * SCROLL REVEAL
+         */
+        const revealElements = document.querySelectorAll('.reveal');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => observer.observe(el));
+
+        /* 
+         * NUMBER COUNTER
+         */
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000;
+                    const startTime = performance.now();
+
+                    function updateCounter(currentTime) {
+                        const elapsedTime = currentTime - startTime;
+                        if (elapsedTime < duration) {
+                            const progress = elapsedTime / duration;
+                            const currentCount = Math.floor(progress * target);
+                            counter.innerText = currentCount;
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    }
+                    requestAnimationFrame(updateCounter);
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 1 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        /* 
+         * FAQ ACCORDION
+         */
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        /* 
+         * CONTACT FORM
+         */
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate form submission
+            contactForm.style.display = 'none';
+            formSuccess.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
